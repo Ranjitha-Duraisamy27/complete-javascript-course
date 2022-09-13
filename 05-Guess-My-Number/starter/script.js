@@ -24,6 +24,10 @@ const updateScore = () => {
     scoreEl.textContent = score;
 }
 
+const displayMessage = (message) => {
+    message.textContent = message;
+}
+
 const displayNumber = () => {
     number.textContent = actualNumber;
     bodyEl.style.backgroundColor = 'green';
@@ -34,27 +38,25 @@ const displayNumber = () => {
 }
 
 const validateNumber = (number) => {
-    if (number < actualNumber) {
-        message.textContent = '📉 Too low';
-        updateScore();
-    } else if (number > actualNumber) {
-        message.textContent = '📈 Too high';
-        updateScore();
-    } else {
-        message.textContent = '✅ Correct!';
+    if (number === actualNumber) {
+        displayMessage('✅ Correct!')
         displayNumber();
+    } else {
+        const message = number > actualNumber ? '📈 Too high' : '📉 Too low';
+        displayMessage(message);
+        updateScore();
     }
 }
 
 document.querySelector('.check').addEventListener('click', () => {
     const enteredNumber = +inputNumber.value;
     if (!enteredNumber) {
-        message.textContent = '❌ No Number';
+        displayMessage('❌ No Number');
     } else {
         if (score > 1) {
             validateNumber(enteredNumber);
-        } else if (score){
-            message.textContent = '😞 You lost the game, try again';
+        } else if (score) {
+            displayMessage('😞 You lost the game, try again')
             updateScore();
         }
     }
