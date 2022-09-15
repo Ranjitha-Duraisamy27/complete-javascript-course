@@ -85,7 +85,7 @@ const changePlayer = () => {
 }
 
 const rollDice = () => {
-    const randomNumber = Math.trunc(Math.random() * 5) + 1;
+    const randomNumber = Math.trunc(Math.random() * 6) + 1;
     diceEl.setAttribute('src', `dice-${randomNumber}.png`);
     diceEl.classList.remove('hidden');
     if(randomNumber !== 1) {
