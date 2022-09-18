@@ -111,3 +111,33 @@ printGoals(...game.scored);
 (team1 > team2) && console.log('Team 1 is more likely to win');
 (team2 > team1) && console.log('Team 2 is more likely to win');
 
+
+/**
+ * Challenge 2: Looping
+ */
+
+//Task 1
+for (const [index, player] of game.scored?.entries()) {
+  console.log(`Goal ${index + 1}: ${player}`);
+}
+
+//Task 2 
+let sum = 0;
+const values = Object.values(game.odds);
+for (const value of values) {
+  sum += value;
+}
+
+console.log(`Average is ${sum / values.length}`)
+
+//Task 3
+for (const [key, value] of Object.entries(game.odds)) {
+  console.log(`Odd of ${game[key] ?? 'Draw'}: ${value}`)
+}
+
+//Bonus
+const scores = {};
+for(const player of game.scored) {
+  scores[player] =  (scores[player] ?? 0) + 1;
+}
+console.log(scores);
