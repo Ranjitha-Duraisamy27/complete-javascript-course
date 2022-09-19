@@ -141,3 +141,41 @@ for(const player of game.scored) {
   scores[player] =  (scores[player] ?? 0) + 1;
 }
 console.log(scores);
+
+
+/**
+ * Challenge #3: Map
+ */
+
+ const gameEvents = new Map([
+  [17, '⚽️ GOAL'],
+  [36, '🔁 Substitution'],
+  [47, '⚽️ GOAL'],
+  [61, '🔁 Substitution'],
+  [64, '🔶 Yellow card'],
+  [69, '🔴 Red card'],
+  [70, '🔁 Substitution'],
+  [72, '🔁 Substitution'],
+  [76, '⚽️ GOAL'],
+  [80, '⚽️ GOAL'],
+  [92, '🔶 Yellow card'],
+]);
+
+//Task 1 : Create unique event array
+const events = [...new Set(gameEvents.values())];
+console.log(events);
+
+//Task 2: remove key 64
+gameEvents.delete(64)
+console.log(gameEvents);
+
+//Task 3
+
+const time = [...gameEvents.keys()].pop();
+console.log(`An event happened, on average, every ${time / gameEvents.size} minutes`);
+
+//Task 4
+for(const [key, value] of gameEvents) {
+  const str = `[${key <= 45 ? 'FIRST HALF' : 'SECOND HALF'}] ${key} : ${value}`;
+  console.log(str);
+}
