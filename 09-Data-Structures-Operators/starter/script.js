@@ -179,3 +179,25 @@ for(const [key, value] of gameEvents) {
   const str = `[${key <= 45 ? 'FIRST HALF' : 'SECOND HALF'}] ${key} : ${value}`;
   console.log(str);
 }
+
+
+//Challenge #4
+
+const textarea = document.createElement('textarea');
+document.querySelector('body').appendChild(textarea);
+const button = document.createElement('button');
+button.textContent = 'Submit';
+document.querySelector('body').appendChild(button);
+
+button.addEventListener('click', () => {
+  const inputStr = textarea.value;
+  const listOfStr = inputStr.split('\n');
+  for (const [key, word] of listOfStr.entries()) {
+    const wordArr = word.trim().toLowerCase().split('_');
+    if(wordArr.length > 1) {
+      const [word1, word2] = wordArr;
+      const finalStr = word1 + word2[0].toUpperCase() + word2.slice(1);
+      console.log(`${finalStr} ${'✅'.repeat(key + 1)}`);
+    }
+  }
+})
