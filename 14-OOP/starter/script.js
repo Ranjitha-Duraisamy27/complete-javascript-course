@@ -62,3 +62,69 @@ const maruti = Object.create(CarProto);
 console.log(maruti);
 maruti.init('Maruti', 100);
 console.log(maruti.getBrand());
+
+/**
+ * Prototype Inheritance
+ */
+
+function Person(firstName, lastName) {
+    console.log('Person Constructor');
+    this.firstName = firstName;
+    this.lastName = lastName;
+}
+
+Person.prototype.greet = function() {
+    console.log(`Hello, My name is ${this.name} and I study ${this.course}`);
+}
+
+function Student(firstName, lastName, course) {
+    console.log('Student Constructor');
+    Person.call(this, firstName, lastName);
+    this.course = course;
+}
+
+Student.prototype = Object.create(Person.prototype);
+Student.prototype.constructor = Student;
+
+console.dir(Student.prototype.__proto__)
+
+Student.prototype.getCourse = function() {
+    return this.course;
+}
+
+const raj = new Person('Raj', 'Surya');
+console.log(raj);
+console.log(Student.prototype.constructor);
+const divya = new Student('Divya', 'Raj', 'CSE');
+console.log(divya);
+console.log(divya.getCourse());
+divya.greet();
+const prakhas = new Student('Prakhas', 'Kumar', 'ECE');
+prakhas.greet();
+console.log(Student.prototype.constructor);
+
+
+function Ev(make, speed, charge) {
+    Car.call(this, make, speed);
+    this.charge = charge;
+}
+
+Ev.prototype = Object.create(Car.prototype);
+Ev.prototype.constructor = Ev;
+
+Ev.prototype.chargeBattery = function(chargeTo) {
+    this.charge = chargeTo;
+}
+
+Ev.prototype.accelerate = function() {
+    this.speed += 20;
+    this.charge -= 1;
+    console.log(`${this.make} going at ${this.speed}, with the charge of ${this.charge}`);
+}
+
+const electricCar = new Ev('Tesla', 120, 23);
+electricCar.accelerate();
+electricCar.brake();
+electricCar.chargeBattery(50);
+electricCar.accelerate();
+
